@@ -2136,10 +2136,14 @@ PyTypeObject NoDefault_Type = {
     .tp_basicsize = 0
 };
 
-#if PY312_PLUS
+#if PY313_PLUS
+PyObject _NoDefault_Object = {
+    PyObject_HEAD_INIT(&NoDefault_Type)
+};
+#elif PY312_PLUS
 PyObject _NoDefault_Object = {
     _PyObject_EXTRA_INIT
-    { _Py_IMMORTAL_REFCNT },
+    _Py_IMMORTAL_REFCNT,
     &NoDefault_Type
 };
 #else
@@ -2240,7 +2244,12 @@ PyTypeObject Unset_Type = {
     .tp_basicsize = 0
 };
 
-#if PY312_PLUS
+
+#if PY313_PLUS
+PyObject _Unset_Object = {
+    PyObject_HEAD_INIT(&Unset_Type)
+};
+#elif PY312_PLUS
 PyObject _Unset_Object = {
     _PyObject_EXTRA_INIT
     { _Py_IMMORTAL_REFCNT },
